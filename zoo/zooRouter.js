@@ -24,7 +24,22 @@ const config = {
         .catch(err => res.status(500).json(err))
   });
 
-  
+  router.post('/', (req, res) => {
+      const role = req.body;
+      db('zoos').insert(role)
+      .then(ids => res.status(201).json(ids))
+      .catch(err => res.status(500).json(err))
+  });
+
+  router.put('/:id', (req, res) => {
+      const { id } = req.params;
+      const role = req.body;
+      db('zoos').where({ id }).update(role)
+      .then(count => res.json({count}))
+      .catch(err => res.status(500).json(err))
+  });
+
+
 
   module.exports = router;
 
