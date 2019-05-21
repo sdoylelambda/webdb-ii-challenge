@@ -27,7 +27,7 @@ const config = {
   router.post('/', (req, res) => {
       const role = req.body;
       db('zoos').insert(role)
-      .then(ids => res.status(201).json(ids))
+      .then(name => res.status(201).json(name))
       .catch(err => res.status(500).json(err))
   });
 
