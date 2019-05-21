@@ -39,7 +39,11 @@ const config = {
       .catch(err => res.status(500).json(err))
   });
 
-
+  router.delete('/:id', (req, res) => {
+      db.update('zoos').where({ id }).del()
+      .then(count => res.json({count}))
+      .catch(err => res.status(500).json(err))
+  });
 
   module.exports = router;
 
