@@ -26,22 +26,28 @@ const config = {
 
   router.post('/', (req, res) => {
       const role = req.body;
-      db('zoos').insert(role)
-      .then(name => res.status(201).json(name))
-      .catch(err => res.status(500).json(err))
+      if(role.name && role.name.length) {
+          db('zoos').insert(role)
+          .then(name => res.status(201).json(name))
+          .catch(err => res.status(500).json(err))
+        } else {
+            res.status(400).json({error: 'Error'})
+        }
   });
 
   router.put('/:id', (req, res) => {
       const { id } = req.params;
       const role = req.body;
+
       db('zoos').where({ id }).update(role)
+
+
       .then(count => res.json({count}))
       .catch(err => res.status(500).json(err))
   });
 
   router.delete('/:id', (req, res) => {
     const { id } = req.params;
-    const role = req.body;
       db('zoos').where({ id }).del()
       .then(count => res.json({count}))
       .catch(err => res.status(500).json(err))
