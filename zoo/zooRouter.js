@@ -19,7 +19,7 @@ const config = {
 
   router.get('/:id', (req, res) => {
         const { id } = req.params;
-        db('roles').where({ id })
+        db('zoos').where({ id })
         .then(records => res.json(records))
         .catch(err => res.status(500).json(err))
   });
@@ -40,7 +40,7 @@ const config = {
   });
 
   router.delete('/:id', (req, res) => {
-      db.update('zoos').where({ id }).del()
+      db('zoos').where({ id }).del()
       .then(count => res.json({count}))
       .catch(err => res.status(500).json(err))
   });
